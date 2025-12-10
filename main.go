@@ -121,11 +121,11 @@ func checkThresholds(loadAvg float64, memTotal, memUsed, diskTotal, diskUsed, ne
 		fmt.Fprintf(os.Stdout, "Free disk space is too low: %d Mb left\n", freeMB)
 	}
 
-	// 7. Сеть: > 90% использования, считаем свободную полосу в мегабит/сек
+	// 7. Сеть: > 90% использования
 netPercent := netUsed * 100 / netTotal
 if netPercent > netHighPercent {
     freeBytes := netTotal - netUsed
-    // Автотесты ожидают расчёт через деление на 1_000_000
     freeMbit := freeBytes / 1_000_000
     fmt.Fprintf(os.Stdout, "Network bandwidth usage high: %d Mbit/s available\n", freeMbit)
+}
 }
